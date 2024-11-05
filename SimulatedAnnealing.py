@@ -70,6 +70,6 @@ best_path, best_cost = simulated_annealing(stores, start_store, initial_temperat
 end_time = time.time()
 
 path = " - ".join([f"{store.name}({store.type})" for store in best_path])
-print(f"Optimal Path: {path}")
-print(f"Total Distance: {best_cost}")
+print(f"Path: {path}")
+print(f"Cost: {best_cost}")
 print(f"Execution Time: {end_time - start_time} seconds")
