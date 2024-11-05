@@ -3,8 +3,7 @@ import heapq
 import time
 from collections import namedtuple
 
-
-df = pd.read_csv('data.csv')
+df = pd.read_csv('dataFIX.csv')
 
 store_types = df['Store Type'].unique()
 
@@ -19,7 +18,7 @@ stores = [
 
 def a_star_search(stores, start):
     priority_queue = [(0, 0, -start.rating, start)]
-    visited = set()
+    visited = []
     type_visited = set()
 
     while priority_queue:
@@ -30,7 +29,7 @@ def a_star_search(stores, start):
         if store_key in visited or node.type in type_visited:
             continue
 
-        visited.add(store_key)
+        visited.append(store_key)
         type_visited.add(node.type)
 
         if len(type_visited) == len(store_types):
