@@ -4,7 +4,7 @@ import time
 from collections import namedtuple
 
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('dataFIX.csv')
 
 store_types = df['Store Type'].unique()
 
@@ -16,9 +16,6 @@ stores = [
         df['Store Names'], df['Store Type'], df['Location'], df['Rating'], df['Coordinate X'], df['Coordinate Y']
     )
 ]
-
-def heuristic(store1, store2):
-    return ((store1.coordinateX - store2.coordinateX) ** 2 + (store1.coordinateY - store2.coordinateY) ** 2) ** 0.5
 
 def a_star_search(stores, start):
     priority_queue = [(0, 0, -start.rating, start)]
@@ -44,7 +41,7 @@ def a_star_search(stores, start):
             if store_key not in visited and store.type not in type_visited:
                 distance = get_distance(node, store)
                 new_cost = actual_cost + distance
-                estimated_total_cost = new_cost + heuristic(store, stores[0])  # A* f(n) = g(n) + h(n)
+                estimated_total_cost = new_cost + get_distance(store, stores[0])  # A* f(n) = g(n) + h(n)
                 heapq.heappush(priority_queue, (estimated_total_cost, new_cost, -store.rating, store))
 
     return None, float('inf')
