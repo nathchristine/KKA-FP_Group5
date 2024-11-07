@@ -4,7 +4,7 @@ import math
 import time
 from collections import namedtuple
 
-df = pd.read_csv('dataFIX.csv')
+df = pd.read_csv('data.csv')
 store_types = df['Store Type'].unique()
 Store = namedtuple('Store', ['name', 'type', 'floor', 'rating', 'coordinateX', 'coordinateY'])
 
